@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('authBP.static', filename='css/styles.css')}}">
-    <script src="{{ url_for('authBP.static', filename='js/scriptjs')}}" defer></script>
+    <script src="{{ url_for('authBP.static', filename='js/script.js')}}" defer></script>
     <title>Register</title>
 </head>
 <body>
@@ -14,7 +14,8 @@
             <input type="text" placeholder="Enter Full Name" name="usersFullName">
             <input type="email" placeholder="Enter Email Address" name="usersEmail">
             <input type="password" class="pass1" placeholder="Enter Password" name="usersPass1">
-            <input type="password" class="pass2" placeholder="Enter Password" name="usersPass2">
+            <input type="password" class="pass2" placeholder="Confirm Password" name="usersPass2">
+            <p class="isEqual"></p>
             <input type="submit" value="Register">
         </form>
     </div>

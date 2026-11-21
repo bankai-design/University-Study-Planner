@@ -1,7 +1,16 @@
-const button = document.querySelector("input[type='submit']")
+const pass = document.querySelector(".pass1")
+const confirmPass = document.querySelector(".pass2")
+const textIfEqual = document.querySelector(".isEqual")
 
-button.addEventListener("click", testing)
+confirmPass.addEventListener("input", checkingEquality)
 
-function testing() {
-    console.log("this is working")
+
+function checkingEquality() {
+    if (confirmPass.value != pass.value) {
+        textIfEqual.textContent = "Passwords are not the same"
+        textIfEqual.style.color = "red"
+    } else {
+        textIfEqual.textContent = "Passwords are the same"
+        textIfEqual.style.color = "green"
+    }
 }
