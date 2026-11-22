@@ -14,21 +14,38 @@ def registerPage():
         foundUser = User.query.filter_by(email=userEmail).first()
         if foundUser:
             flash("Email already has an account")
-            return redirect(url_for("authBP.loginPage"))
+            return redirect(url_for("authBP.view"))
         else:
             if pass1 == pass2:
                 account = User(name=fullName, email=userEmail, password=pass1)
                 db.session.add(account)
                 db.session.commit()
-
-            return redirect(url_for("authBP.loginPage"))
+                return redirect(url_for("authBP.loginPage"))
+            else:
+                flash("Passwords are not the same")
+                return render_template("register.html")
     else:
         return render_template("register.html")
 
-@authBP.route("/login")
+@authBP.route("/login", methods=["POST", "GET"])
 def loginPage():
-    return render_template("login.html")
+    if request.method == "POST":
+        userEmail = request.form["loginEmail"]
+        usersPass = request.form["loginPass"]
+
+        foundUser = User.query.filter_by(email=userEmail, password=usersPass).first()
+        if foundUser:
+            return redirect(url_for("authBP.placeholder"))
+        else:
+            flash("Account doesn't exist")
+            return redirect(url_for("authBP.registerPage"))
+    else:
+        return render_template("login.html")
 
 @authBP.route("/view")
 def view():
     return render_template("view.html", values=User.query.all())
+
+@authBP.route("/placeholder")
+def placeholder():
+    return "the login was successfull!"
